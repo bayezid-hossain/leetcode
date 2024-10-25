@@ -3,13 +3,7 @@ class Solution:
         ans=0
         
         def encryptedNum(num):
-            maxval = 0
-            count=0
-            while num>0:
-                maxval=max(maxval,num%10)
-                num//=10
-                count+=1
-            return int(str(maxval)*count)
+            return int(sorted(str(num))[-1]*len(str(num)))
         for i in nums:
             ans+=encryptedNum(i)
 
