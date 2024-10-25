@@ -8,7 +8,7 @@ class Solution:
     def insertIntoMaxTree(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
         if not root:
             return TreeNode(val)
-        if root and root.val < val:
+        if root.val < val:
             node = TreeNode(val)
             node.left = root
             return node
