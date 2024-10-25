@@ -15,8 +15,6 @@ class Solution:
                 return None
             node.val=max(array)
             index=0
-            leftprefix=[]
-            rightsuffix=[]
             for i in range(len(array)):
                 if array[i]==node.val:
                     index=i
@@ -34,6 +32,5 @@ class Solution:
             
             
             return node
-        root=(buildTree(root,nums))
-        return root
+        return buildTree(root,nums)
             
