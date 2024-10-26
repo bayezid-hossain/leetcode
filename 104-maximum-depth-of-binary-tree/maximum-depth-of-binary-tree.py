@@ -9,18 +9,18 @@ class Solution:
         if not root:
             return 0
         max_d=0
-        queue=deque([(root,1)])
+        queue=deque([root])
 
         while queue:
             length=len(queue)
             for _ in range(length):
-                curr,distance=queue.popleft()
+                curr=queue.popleft()
 
                 if curr.left:
-                    queue.append([curr.left,distance+1])
+                    queue.append(curr.left)
                     
                 if curr.right:
-                    queue.append([curr.right,distance+1])
-                max_d=max(max_d,distance)
+                    queue.append(curr.right)
+            max_d+=1
 
         return max_d          
