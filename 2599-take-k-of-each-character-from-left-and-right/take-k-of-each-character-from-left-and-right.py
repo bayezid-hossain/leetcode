@@ -1,34 +1,25 @@
 class Solution:
     def takeCharacters(self, s: str, k: int) -> int:
-        # make a duplicate and count
-        ss = s*2
-        freq = {'a': s.count('a'), 'b': s.count('b'), 'c': s.count('c')}
 
-        if any([v < k for v in freq.values()]): # using any() to check if impossible
+        # instead of removing from both the ends 
+        # you can you technique to get the longest substring to get the characters count(char) - k
+        # if any character count goes below 0 then return -1
+
+        # for all the character count decrease by k
+        limit = {char: s.count(char) - k for char in "abc"}
+        print("Limit:",limit)
+        if any(x < 0 for x in limit.values()):
             return -1
+        
+        cnts = {c: 0 for c in 'abc'}
+        print("Counts:",cnts)
+        ans = l = 0
+        for r, c in enumerate(s):
+            cnts[c] += 1
 
-        # just some variables
-        windows = []
-        start = 0
-        end = len(s)-1
+            while cnts[c] > limit[c]:
+                cnts[s[l]] -= 1
+                l += 1
+            ans = max(ans, r - l + 1)
+        return len(s) - ans
 
-        # make sure start never crosses the boundary
-        while start < len(s):
-
-            # as long as the window is still valid and start doesn't cross the boundary
-            while start < len(s) and all([v >= k for v in freq.values()]):
-                # get rid of previous letter
-                freq[s[start]] -= 1
-                # next!
-                start += 1
-
-            windows.append(end-start+2)
-
-            # as long as the window isn't valid
-            while end < len(ss)-1 and any([v < k for v in freq.values()]):
-                end += 1
-                freq[ss[end]] += 1
-            windows.append(end-start+1)
-
-        # just return the smallest window size
-        return min(windows)
