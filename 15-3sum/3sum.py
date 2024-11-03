@@ -8,7 +8,6 @@ class Solution:
                 continue
             hi = n - 1
             lo = i+1
-            lo += (lo == i)
             while lo < hi:
                 sum = nums[i] + nums[lo] + nums[hi]
                 if sum == 0:
