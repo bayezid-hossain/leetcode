@@ -3,7 +3,6 @@ class Solution:
         closest=float('inf')
         result=0
         nums=sorted(nums)
-        print(nums)
         for i in range(len(nums)-2):
             hi=len(nums)-1
             lo=i+1
