@@ -7,7 +7,7 @@ class Solution:
             if i and nums[i] == nums[i-1]: #remove duplicate
                 continue
             hi = n - 1
-            lo = bisect.bisect_left(nums, - nums[i] - nums[hi], i + 1, hi) - 1 #binary search
+            lo = i+1
             lo += (lo == i)
             while lo < hi:
                 sum = nums[i] + nums[lo] + nums[hi]
