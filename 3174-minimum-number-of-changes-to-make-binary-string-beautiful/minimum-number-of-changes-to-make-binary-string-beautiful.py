@@ -1,5 +1,6 @@
 class Solution:
     def minChanges(self, s: str) -> int:
+        @cache
         def breakandbuild(string):
             if len(string)==2:
                 return 0 if string[0]==string[1] else 1
