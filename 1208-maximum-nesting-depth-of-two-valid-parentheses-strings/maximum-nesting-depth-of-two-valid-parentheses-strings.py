@@ -8,19 +8,12 @@ class Solution:
         for c in seq:
 
             if c=='(':
-                next=0
-                if depth[A]<=depth[B]:
-                    next=A
-                else:
-                    next=B
+                
+                next=A if depth[A]<=depth[B] else B
                 res.append(next)
                 depth[next]+=1
             else:
-                next=0
-                if depth[A]>=depth[B]:
-                    next=A
-                else:
-                    next=B
+                next=A if depth[A]>=depth[B] else B
                 res.append(next)
                 depth[next]-=1
         return res
