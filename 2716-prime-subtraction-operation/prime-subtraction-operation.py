@@ -8,7 +8,7 @@ class Solution:
                     return i
         for i in range(len(nums)-1,0,-1):
             if(nums[i]<=nums[i-1]):
-                print(nums[i],nums[i-1])
+                # print(nums[i],nums[i-1])
                 minus=minprime(nums[i-1]-nums[i])
                 if minus is None:
                     return False
