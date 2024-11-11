@@ -6,14 +6,13 @@ class Solution:
             for i in primes:
                 if i > primegreaterThan:
                     return i
+            return -1
         for i in range(len(nums)-1,0,-1):
             if(nums[i]<=nums[i-1]):
                 # print(nums[i],nums[i-1])
                 minus=minprime(nums[i-1]-nums[i])
-                if minus is None:
-                    return False
                 nums[i-1]=nums[i-1]-minus
-                if nums[i-1]<=0:
+                if nums[i-1]<=0 or nums[i-1]>nums[i]:
                     return False
                 
         return True
