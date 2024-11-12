@@ -16,14 +16,13 @@ class Solution:
         #optimal than bruteforce
         # print(queries)
        
-        maxI=float('inf')
-        res=[[0,0,maxI]]
+        res=[[0,0,0]]
         items.sort(key=lambda x:x[0])
         for price,beauty in items:
             lastBracket=res[-1]
             if beauty>lastBracket[1]:
                 res[-1][2]=price
-                res.append([price,beauty,maxI])
+                res.append([price,beauty,0])
         ans=[]
         for query in queries:
             for i in range(len(res)-1,-1,-1):
