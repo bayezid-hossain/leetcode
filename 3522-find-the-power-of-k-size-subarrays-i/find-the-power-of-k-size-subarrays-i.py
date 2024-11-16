@@ -1,15 +1,32 @@
+from typing import List
+
 class Solution:
     def resultsArray(self, nums: List[int], k: int) -> List[int]:
-        def getMax(start,end,nums):
-            max_num=nums[start]
-            for start in range(start+1,end):
-                # print(nums[start])
-                if max_num>=nums[start] or nums[start]-max_num!=1:
-                    return -1
-                else: max_num=nums[start]
-            return max_num
-        result=[]
-        for i in range(0,len(nums)-k+1):
-            # print(i)
-            result.append(getMax(i,i+k,nums))
+        """Find the Power of K-Size Subarrays"""
+        # Skip if k is 1
+        if k == 1:
+            return nums
+            
+        n = len(nums)
+        result = []
+        left = 0
+        right = 1
+        
+        while right < n:
+            # Check if current sequence is not consecutive
+            is_not_consecutive = nums[right] - nums[right-1] != 1
+            
+            if is_not_consecutive:
+                # Mark invalid sequences
+                while left < right and left + k - 1 < n:
+                    result.append(-1)
+                    left += 1
+                left = right
+            # Found valid k-length sequence
+            elif right - left == k - 1:
+                result.append(nums[right])
+                left += 1
+                
+            right += 1
+            
         return result
