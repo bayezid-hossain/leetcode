@@ -1,8 +1,7 @@
 class Solution:
     def shortestSubarray(self, nums: List[int], k: int) -> int:
         res=float('inf')
-
-        min_heap=[]
+        q=deque()
         cur_sum=0
 
         for r in range(len(nums)):
@@ -11,9 +10,11 @@ class Solution:
             if cur_sum>=k:
                 res=min(res,r+1)
 
-            while min_heap and cur_sum-min_heap[0][0]>=k:
-                prefix_sum,end_idx=heapq.heappop(min_heap)
+            while q and cur_sum-q[0][0]>=k:
+                prefix_sum,end_idx=q.popleft()
                 res=min(res,r-end_idx)
-            heapq.heappush(min_heap,(cur_sum,r))
+            while q and q[-1][0]>cur_sum:
+                q.pop()
+            q.append((cur_sum,r))
 
         return -1 if res==float('inf') else res
