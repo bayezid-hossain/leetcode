@@ -5,13 +5,15 @@ class Solution:
         countNeg=0
         summation=0
         smallestAbs=float('inf')
-        for r in range(row):
-            for c in range(col):
-                curAbs=abs(matrix[r][c])
-                summation+=curAbs
-                smallestAbs=min(smallestAbs,curAbs)
-                if matrix[r][c]<0:
+        for r in matrix:
+            for c in r:
+                
+                if c<0:
+                    c=-c
                     countNeg+=1
+                summation+=c
+                if c<smallestAbs:
+                    smallestAbs=c
         
         if countNeg%2==0:
             return summation
