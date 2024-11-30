@@ -1,70 +1,28 @@
 class Solution:
     def minimumTime(self, grid: List[List[int]]) -> int:
-        directions=[(1,0),(-1,0),(0,1),(0,-1)]
-
+        
         if grid[0][1]>1 and grid[1][0]>1:
             return -1
         m,n=len(grid),len(grid[0])
         heap=[(0,0,0)]
-        visited=[[False] * n for _ in range(m)]
+        visited=set()
 
         while heap:
-            time,row,col=heapq.heappop(heap)
-            if row==m-1 and col==n-1:
+            time,r,c=heapq.heappop(heap)
+            
+            if (r,c)==(m-1,n-1):
                 return time
-            if visited[row][col]:
-                continue
-            visited[row][col]=True
-
-            for dr,dc in directions:
-                r,c=row+dr,col+dc
-
-                if 0 <= r < m and 0 <= c < n and not visited[r][c]:
-                    if grid[r][c]<=time+1:
-                        heapq.heappush(heap,(time+1,r,c))
-                    else:
-                        diff=grid[r][c]-time
-                        if diff%2==1:
-                            heapq.heappush(heap,(grid[r][c],r,c))
-                        else:
-                            heapq.heappush(heap,(grid[r][c]+1,r,c))
-        return -1
-        # directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]  # Down, Up, Right, Left
-        
-        # # If the starting point is blocked, return -1
-        # if grid[0][1] > 1 and grid[1][0] > 1:
-        #     return -1
-        
-        # m, n = len(grid), len(grid[0])
-        # heap = [(0, 0, 0)]  # (time, row, col)
-        # visited = [[False] * n for _ in range(m)]  # To track visited cells
-        
-        # while heap:
-        #     time, row, col = heapq.heappop(heap)
+            nei=[[r+1,c],[r-1,c],[r,c+1],[r,c-1]]
             
-        #     # If we reach the bottom-right corner, return the time
-        #     if row == m - 1 and col == n - 1:
-        #         return time
-            
-        #     # Skip if already visited
-        #     if visited[row][col]:
-        #         continue
-        #     visited[row][col] = True
-            
-        #     # Explore all directions
-        #     for dr, dc in directions:
-        #         r, c = row + dr, col + dc
+            for nr,nc in nei:
                 
-        #         # Check bounds and if already visited
-        #         if 0 <= r < m and 0 <= c < n and not visited[r][c]:
-        #             if grid[r][c] <= time + 1:
-        #                 heapq.heappush(heap, (time + 1, r, c))
-        #             else:
-        #                 diff = grid[r][c] - time
-        #                 if diff % 2 == 1:
-        #                     heapq.heappush(heap, (grid[r][c], r, c))
-        #                 else:
-        #                     heapq.heappush(heap, (grid[r][c] + 1, r, c))
-        
-        # # If no valid path is found, return -1
-        # return -1
+                if nr<0 or nc<0 or nr==m or nc==n or (nr,nc) in visited:
+                    continue
+                wait=0
+                
+                if abs(grid[nr][nc]-time)%2==0:
+                    wait+=1
+                n_time=max(grid[nr][nc]+wait,time+1)
+                heapq.heappush(heap,(n_time,nr,nc))
+                
+                visited.add((nr,nc))
