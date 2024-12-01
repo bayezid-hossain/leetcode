@@ -9,7 +9,8 @@ class Solution:
             graph[start].append(end)
             inOutDeg[start] += 1  # out-degree
             inOutDeg[end] -= 1    # in-degree
-
+        # print(inOutDeg)
+        # print(graph)
         # Find starting node 
         startNode = pairs[0][0] 
         for node in inOutDeg:
@@ -19,9 +20,12 @@ class Solution:
 
         path = []
         def dfs(curr):
+            # print(curr)
+            # print(graph[curr])
             while graph[curr]:
                 nextNode = graph[curr].pop()
                 dfs(nextNode)
+                print(curr,nextNode)
                 path.append((curr, nextNode))
 
         dfs(startNode)
