@@ -23,5 +23,5 @@ class Solution:
                 # queue.pop(0)
 
         # print(queue,importance)
-        print(queue)
+        # print(queue)
         return importance
