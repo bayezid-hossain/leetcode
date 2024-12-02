@@ -10,14 +10,14 @@ class Employee:
 class Solution:
     def getImportance(self, employees: List['Employee'], id: int) -> int:
         importance=0
-        queue=[id]
+        queue=set({id})
         new_list = sorted(employees, key=lambda x: x.id, reverse=False)
         # print(employees)
         for employee in new_list:
             # print(employee.id)
             if employee.id in queue:
                 for cur_id in employee.subordinates:
-                    queue.append(cur_id)
+                    queue.add(cur_id)
                 # print(queue,employee.id)
                 importance+=employee.importance
                 # queue.pop(0)
