@@ -15,18 +15,19 @@ class Solution:
 #         result+=s[spacePointer:]
 #         return result
 
-        result=""
-        temp=""
+        result=[]
+        temp=[]
         spacePointer=0
         length=len(s)
         for i in range(length):
             if spacePointer==len(spaces):
-                break
+                temp.append(s[i])
+                continue
             if i==spaces[spacePointer]:
-                result+=temp+" "
-                temp=s[i]
+                result.append("".join(temp))
+                temp=[s[i]]
                 spacePointer+=1
             else:
-                temp+=s[i]
-                
-        return result+s[spaces[-1]:]
+                temp.append(s[i])
+        result.append("".join(temp))    
+        return " ".join(result)
