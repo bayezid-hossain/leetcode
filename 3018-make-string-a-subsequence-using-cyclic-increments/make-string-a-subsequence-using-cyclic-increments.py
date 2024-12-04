@@ -13,9 +13,7 @@ class Solution:
             if cur_main==next_sub:
                 pointerSub+=1
             else:
-                summation=(ord(cur_main)+1)-97
-                summation=summation%26
-                nextChar=chr(summation+97)
+                nextChar=chr((((ord(cur_main)+1)-97)%26)+97)
                 if nextChar==next_sub: 
                     pointerSub+=1
             pointerMain+=1
