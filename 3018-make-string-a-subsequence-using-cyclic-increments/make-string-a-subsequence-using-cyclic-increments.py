@@ -10,12 +10,9 @@ class Solution:
         while pointerMain<length1 and pointerSub<length2:
             cur_main=str1[pointerMain]
             next_sub=str2[pointerSub]
-            if cur_main==next_sub:
+            if cur_main==next_sub or chr((((ord(cur_main)+1)-97)%26)+97)==next_sub:
                 pointerSub+=1
-            else:
-                nextChar=chr((((ord(cur_main)+1)-97)%26)+97)
-                if nextChar==next_sub: 
-                    pointerSub+=1
+            
             pointerMain+=1
         return True if pointerSub==length2 else False
 
