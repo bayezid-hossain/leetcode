@@ -8,18 +8,16 @@ class Solution:
         pointerSub=0
         pointerMain=0
         while pointerMain<length1 and pointerSub<length2:
-            if str1[pointerMain]==str2[pointerSub]:
-                pointerMain+=1
+            cur_main=str1[pointerMain]
+            next_sub=str2[pointerSub]
+            if cur_main==next_sub:
                 pointerSub+=1
-                continue
             else:
-                summation=(ord(str1[pointerMain])+1)-97
+                summation=(ord(cur_main)+1)-97
                 summation=summation%26
                 nextChar=chr(summation+97)
-                if nextChar==str2[pointerSub]: 
-                    pointerMain+=1
+                if nextChar==next_sub: 
                     pointerSub+=1
-                    continue
             pointerMain+=1
         return True if pointerSub==length2 else False
 
