@@ -14,7 +14,6 @@ class Solution:
                 sum+=i
                 count+=1
             i+=1
-        if sum>maxSum:
-            count-=1
-        return count
+        
+        return count-1 if sum>maxSum else count
             
