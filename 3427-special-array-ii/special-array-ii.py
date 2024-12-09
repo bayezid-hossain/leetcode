@@ -1,9 +1,9 @@
 class Solution:
     def isArraySpecial(self, nums: List[int], queries: List[List[int]]) -> List[bool]:
-        
-        prefixArr=[0] * len(nums)
+        n=len(nums)
+        prefixArr=[0] * n
 
-        for i in range(1,len(nums)):
+        for i in range(1,n):
             prefixArr[i]=prefixArr[i-1]
 
             if nums[i]%2==nums[i-1]%2:
