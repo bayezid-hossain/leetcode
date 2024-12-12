@@ -1,12 +1,12 @@
 class Solution:
     def pickGifts(self, gifts: List[int], k: int) -> int:
-        maxheap=[]
-        for n in gifts:
-            heapq.heappush(maxheap,-n)
-            
+        
+        gifts=[-x for x in gifts]
+        
+        heapify(gifts)
         
         for i in range(k):
-            maxnum=-heapq.heappop(maxheap)
+            maxnum=-heapq.heappop(gifts)
             newnum=floor(pow(maxnum,0.5))
-            heapq.heappush(maxheap,-newnum)
-        return -(sum(maxheap))
+            heapq.heappush(gifts,-newnum)
+        return -(sum(gifts))
