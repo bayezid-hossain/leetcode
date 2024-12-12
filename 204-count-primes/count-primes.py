@@ -4,14 +4,12 @@ class Solution:
         
         p=2
         
-        while p*p<n:
+        count=0
+        while p<n:
             if prime[p]:
+                count+=1
                 for i in range(p*p,n,p):
                     prime[i]=False
             p+=1
-        count=0
-        for i in range(2,n):
-            if prime[i]:
-                # print(i)
-                count+=1
+            
         return count
